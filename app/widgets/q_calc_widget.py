@@ -88,12 +88,11 @@ class QCalculatorWidget(QWidget):
             'log2': math.log2,
         } 
     
-    def add_char(self, ch: str):
-        if ch == '.':
-            expr = self.prepare_expr(self.expr)
-            last_number = expr.split('+')[-1].split('-')[-1].split('*')[-1].split('/')[-1]
-            if '.' in last_number:
-                return  
+    def add_dot(self, ch: str):
+        expr = self.prepare_expr(self.expr)
+        last_number = expr.split('+')[-1].split('-')[-1].split('*')[-1].split('/')[-1]
+        if '.' in last_number:
+            return  
 
         self.expr += ch
         self.display.setText(self.expr)
@@ -146,7 +145,7 @@ class QCalculatorWidget(QWidget):
             case '=':
                 self.calculate()
             case '.':
-                self.add_char(label)
+                self.add_dot(label)
             case _:
                 self.expr += label
                 self.display.setText(self.expr)
